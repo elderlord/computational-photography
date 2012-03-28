@@ -13,21 +13,30 @@ function image = simpleCopy( fileName, originPos, winSize, multi)
             winSize(i) = oriSize(i);
         end
     end
-    image = [origin(originPos(1): winSize(1), originPos(2): winSize(2),:), origin(originPos(1): winSize(1), originPos(2): winSize(2),:);
-        origin(originPos(1): winSize(1), originPos(2): winSize(2),:), origin(originPos(1): winSize(1), originPos(2): winSize(2),:)];
+    image = origin(originPos(1): winSize(1), originPos(2): winSize(2),:);
+        %[origin(originPos(1): winSize(1), originPos(2): winSize(2),:), origin(originPos(1): winSize(1), originPos(2): winSize(2),:);
+        %origin(originPos(1): winSize(1), originPos(2): winSize(2),:), origin(originPos(1): winSize(1), originPos(2): winSize(2),:)];
     
     imageSize = size(image);
     
     % process x side
-    while imageSize(1) + winSize(1) <= oriSize(1) * multi
-        image = [image(:,:,:); image(originPos(1):winSize(1),:,:)];
-        imageSize = size(image);
+    while imageSize(1) + winSize(1) - originPos(1) + 1 <= multi(1)
+        tmp = [image(:,:,:); image(1:winSize(1) - originPos(1) + 1,:,:)];
+        imageSize = size(tmp);
+        image = tmp;
     end
-    if imageSize(1) < oriSize(1) * multi
-        image = [image(:,:,:), image(originPos(1):oriSize(1) * multi - imageSize(1),:,:)];
+    if imageSize(1) < multi(1)
+        image = [image(:,:,:); image(1:multi(1) - imageSize(1),:,:)];
     end
     
     % process y side
-    %image = [image(:,:,:);image(:,:,:)];
+    while imageSize(2) + winSize(2)  - originPos(2) + 1 <= multi(2)
+        tmp = [image(:,:,:), image(:,1:winSize(2)  - originPos(2) + 1,:)];
+        imageSize = size(tmp);
+        image = tmp;
+    end
+    if imageSize(2) < multi(2)
+        image = [image(:,:,:), image(:,1:multi(2) - imageSize(2),:)];
+    end
 end
 
