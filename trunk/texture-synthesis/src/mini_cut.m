@@ -13,11 +13,11 @@ if( nargin > 1 && dir == 1 )
     input_text = input_text';
 end;
 
-%產生一個計算cost paths的陣列,並把第一個row複製到cost paths中
+%產生一個計算cost_paths的陣列,並把第一個row複製到cost_paths中
 cost_path = zeros(size(input_text));
 cost_path(1:end,:) = input_text(1:end,:);
 
-%由第二個陣列開始計算 cost paths直到結束
+%由第二個row開始計算cost直到結束
 for i=2:size(cost_path,1),
     
     cost_path(i,1) = input_text(i,1) + min( cost_path(i-1,1), cost_path(i-1,2) );
@@ -28,7 +28,7 @@ for i=2:size(cost_path,1),
     
 end;
 
-%找到切的軌跡
+%依據cost找到切的軌跡(偏左(上), 不偏, 偏右(下))
 result_texture = zeros(size(input_text));
 
 [cost, idx] = min(cost_path(end, 1:end));
