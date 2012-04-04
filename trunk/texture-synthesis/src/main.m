@@ -7,15 +7,20 @@ function main( )
 %   error: 計算是否相符的誤差值
 %   simple: 是否簡單做 1->僅是把每個tile複製一塊, 0->複製後再做minimum error boundary cut
 %   useconv: 是否考慮其他pixel的相關性 1->僅考慮上方及左方的重地區域, 0->考慮所有pixel的distances
-    image_name = '../res/S17_m.jpg';
-    picture = imread(image_name);
-    tile_size = 80;
+    dir = '../res/';
+    file_type = '.jpg';
+    image_name = 'Nc13';
+    file_name = [dir image_name file_type];
+    result_name = [dir image_name '_result' file_type];
+    picture = imread(file_name);
+    tile_size = 100;
     tile_number = 4;
     overlap = 10;
     error = 0.01;
     simple = 0;
     useconv = 1;
     
-    image_quilt(picture, tile_size, tile_number, overlap, error, simple, useconv);
+    result = image_quilt(picture, tile_size, tile_number, overlap, error, simple, useconv);
+    imwrite(uint8(result), result_name);
 end
 
