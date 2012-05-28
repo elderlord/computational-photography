@@ -1,16 +1,11 @@
-F_nc = imread('DoGSimple.png');
-F_ncd = im2double(F_nc);
-
-F_eed = EE(F_ncd);
+I = imread('../picture/crysis-3-4.jpg');
+I = im2double(I);
+sigma_s = 60;
+sigma_r = 0.4;
+F_nc = NC(I, sigma_s, sigma_r);
+figure, imshow(I); title('Input photograph');
+figure, imshow(F_nc); title('Normalized convolution');
+F_eed = EE(F_nc);
 figure, imshow(F_eed); title('Edge Enhancement');
-F_eec = zeros(size(F_ncd));
-for x = 1:size(F_eed, 1)
-    for y = 1:size(F_eed, 2)
-        if F_eed(x, y) == 0
-            F_eec(x, y, 1:3) = 0;
-        else
-            F_eec(x, y, 1:3) = F_ncd(x, y, 1:3);
-        end
-    end
-end
+F_eec = CM(F_nc, F_eed);
 figure, imshow(F_eec); title('Image Combine');
