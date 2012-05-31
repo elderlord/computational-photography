@@ -1,6 +1,6 @@
 dir = '../picture/';
-name = 'movie';
-sub = 'jpg';
+name = 'flower';
+sub = 'png';
 
 I = imread([dir, name, '.', sub]);
 I = im2double(I);
