@@ -41,10 +41,10 @@ function result = DoG( img, sigma_e, sigma_r, tau, phi)
                         %Y = 0.299*img(u, v, 1)+0.587*img(u, v, 2)+0.114*img(u, v, 3);
                         %U = 0.436*(img(u, v, 3)-Y/(1-0.114));
                         %V = 0.615*(img(u, v, 1)-Y/(1-0.299));
-                        X = img(u, v, 1) / 100.0;
+                        %X = img(u, v, 1) / 100.0;
                         %Y = 0.5 + 0.5 * ( img(u, v, 2) / 127.0 );
                         %Z = 0.5 + 0.5 * ( img(u, v, 3) / 127.0 );
-                        L = [X, X];%            vec2 L = texture2D(img, uv + vec2(i,j) / img_size).xx;
+                        L = [img(u, v, 1), img(u, v, 1)];%            vec2 L = texture2D(img, uv + vec2(i,j) / img_size).xx;
                         norm = norm + 2.0 * kernel;%            norm += 2.0 * kernel;
                         sum = [sum(1, 1) + kernel(1, 1) * L(1, 1), sum(1, 2) + kernel(1, 2) * L(1, 2)];%            sum += kernel * L;
                     end
