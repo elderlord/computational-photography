@@ -54,15 +54,23 @@ function result = DoG( img, sigma_e, sigma_r, tau, phi)
 
             H = 100.0 * (sum(1, 1) - tau * sum(1, 2));%    float H = 100.0 * (sum.x - tau * sum.y);
             %    float edge = ( H > 0.0 )? 1.0 : 2.0 * smoothstep(-2.0, 2.0, phi * H );
+            
+            %   smoothstep
+            %   genType t;  /* Or genDType t; */
+            %   t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+            %   return t * t * (3.0 - 2.0 * t);
+            
+            %   clamp
+            %   min(max(x, minVal), maxVal).
+            
             edge = 1.0;
             if H < 0.0
                 weight = phi * H;
-                t = min(max((weight - -2.0) / (-2.0 - 2.0), 0.0), 1.0);
+                t = min(max((weight + 2.0) / (2.0 + 2.0), 0.0), 1.0);
                 edge = t * t * (3.0 - 2.0 * t);
             end
             result(x, y, 1:3) = [edge, edge, edge];%    gl_FragColor = vec4(vec3(edge), 1.0);
         end
     end
-
 end
 
