@@ -1,11 +1,10 @@
 function result = RGB2LABALL( img )
-    %img_size = size(img);
-    %for x = 1:img_size(1, 1)
-    %    for y = 1:img_size(1, 2)
-    %        result(x, y, 1:3) = RGB2LAB(img(x, y, 1:3));
-    %    end
-    %end
-    result(1, 1:3) = RGB2LAB(img(1, 1:3));
+    img_size = size(img);
+    for x = 1:img_size(1, 1)
+        for y = 1:img_size(1, 2)
+            result(x, y, 1:3) = RGB2LAB(img(x, y, 1:3));
+        end
+    end
 end
 
 function result = RGB2LAB( img )
