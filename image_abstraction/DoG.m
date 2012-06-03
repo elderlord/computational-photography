@@ -35,9 +35,9 @@ function result = DoG( img, sigma_e, sigma_r, tau, phi)
                 for j = -halfWidth:halfWidth%        for ( int j = -halfWidth; j <= halfWidth; ++j ) {       
                     d = sqrt((i*i)+(j*j));% float d = length(vec2(i,j));
                     kernel = [exp(-d * d / twoSigmaESquared ), exp( -d * d / twoSigmaRSquared )];%vec2 kernel = vec2( exp( -d * d / twoSigmaESquared ), exp( -d * d / twoSigmaRSquared ));
-                    u = abs(floor((uv(1, 1) + i)));
-                    v = abs(floor((uv(1, 2) + j)));
-                    if u > 0 && u < img_size(1, 1) && v > 0 &&  v < img_size(1, 2)
+                    u = uv(1, 1) + i;
+                    v = uv(1, 2) + j;
+                    if u > 0 && u < img_size(1, 1) && v > 0 && v < img_size(1, 2)
                         %Y = 0.299*img(u, v, 1)+0.587*img(u, v, 2)+0.114*img(u, v, 3);
                         %U = 0.436*(img(u, v, 3)-Y/(1-0.114));
                         %V = 0.615*(img(u, v, 1)-Y/(1-0.299));

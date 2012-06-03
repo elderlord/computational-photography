@@ -6,6 +6,7 @@ function result = CQ( img, nbins, phi_q )
     elseif nargin < 3
         phi_q = double(3.4);
     end
+    result = zeros(size(img));
     img_size = [size(img, 1), size(img, 2)];
     for x = 1:img_size(1, 1)
         for y = 1:img_size(1, 2)

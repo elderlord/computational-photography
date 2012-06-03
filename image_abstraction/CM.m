@@ -12,8 +12,8 @@ function [ result ] = CM( image_origin, image_ee, edge_color )
             %    result(x, y, 1:3) = image_origin(x, y, 1:3);
             %end
             result(x, y, 1) = edge_color(1, 1)*(1-image_ee(x, y, 1)) + image_origin(x,y,1)*image_ee(x, y,1);
-            result(x, y, 2) = edge_color(1, 2)*(1-image_ee(x, y, 1)) + image_origin(x,y,2)*image_ee(x, y,1);
-            result(x, y, 3) = edge_color(1, 3)*(1-image_ee(x, y, 1)) + image_origin(x,y,3)*image_ee(x, y,1);
+            result(x, y, 2) = edge_color(1, 2)*(1-image_ee(x, y, 2)) + image_origin(x,y,2)*image_ee(x, y,2);
+            result(x, y, 3) = edge_color(1, 3)*(1-image_ee(x, y, 3)) + image_origin(x,y,3)*image_ee(x, y,3);
         end
     end
 end
